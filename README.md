@@ -1,6 +1,6 @@
 # JavaSinkTracer_MCP
 
-基于函数级污点分析的 Java 源代码漏洞审计工具，通过 Model Context Protocol (MCP) 为 AI 助手提供安全分析能力。
+基于函数级污点分析的 Java 源代码漏洞审计工具JavaSinkTracer，通过 Model Context Protocol (MCP) 为 AI 助手提供安全分析能力。
 
 ## 快速开始
 
