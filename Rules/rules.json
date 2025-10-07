@@ -1,0 +1,427 @@
+{
+  "depth": 5,
+  "path_exclusions": [
+    ".idea", "resources", "test*", "META-INF", ".git", "docs", "example*", "node_modules", "*.md", "build", "out", "target"
+  ],
+  "sink_rules": [
+    {
+      "sink_name": "RCE",
+      "sink_desc": "任意代码执行漏洞",
+      "severity_level": "High",
+      "cwe": "CWE-78",
+      "sinks": [
+        "java.lang.Runtime:exec",
+        "java.lang.Runtime:getRuntime",
+        "java.lang.ProcessBuilder:start",
+        "java.lang.ProcessBuilder:<init>",
+        "javax.script.ScriptEngine:eval",
+        "javax.script.ScriptEngineManager:eval",
+        "groovy.lang.GroovyShell:evaluate",
+        "groovy.lang.GroovyShell:parse",
+        "groovy.util.GroovyScriptEngine:run",
+        "org.codehaus.groovy.runtime.InvokerHelper:runScript",
+        "org.apache.commons.jexl3.JexlEngine:createScript",
+        "org.apache.commons.jexl2.JexlEngine:createScript",
+        "bsh.Interpreter:eval",
+        "org.mozilla.javascript.Context:evaluateString",
+        "org.python.util.PythonInterpreter:exec",
+        "org.python.util.PythonInterpreter:eval",
+        "org.springframework.expression.ExpressionParser:parseExpression",
+        "freemarker.template.Template:process",
+        "org.apache.velocity.VelocityEngine:evaluate",
+        "ognl.Ognl:getValue",
+        "ognl.Ognl:setValue"
+      ]
+    },
+    {
+      "sink_name": "UNSERIALIZE",
+      "sink_desc": "反序列化漏洞",
+      "severity_level": "High",
+      "cwe": "CWE-502",
+      "sinks": [
+        "java.io.ObjectInputStream:readObject",
+        "java.io.ObjectInputStream:readUnshared",
+        "org.yaml.snakeyaml.Yaml:load",
+        "org.yaml.snakeyaml.Yaml:loadAs",
+        "org.yaml.snakeyaml.Yaml:loadAll",
+        "com.thoughtworks.xstream.XStream:fromXML",
+        "com.alibaba.fastjson.JSON:parse",
+        "com.alibaba.fastjson.JSON:parseObject",
+        "com.alibaba.fastjson.JSON:parseArray",
+        "com.alibaba.fastjson2.JSON:parse",
+        "com.alibaba.fastjson2.JSON:parseObject",
+        "com.google.gson.Gson:fromJson",
+        "com.fasterxml.jackson.databind.ObjectMapper:readValue",
+        "org.codehaus.jackson.map.ObjectMapper:readValue",
+        "net.sf.json.JSONObject:toBean",
+        "java.beans.XMLDecoder:readObject",
+        "org.apache.commons.collections.functors.InvokerTransformer:transform",
+        "org.apache.commons.collections4.functors.InvokerTransformer:transform",
+        "com.caucho.hessian.io.HessianInput:readObject",
+        "com.caucho.burlap.io.BurlapInput:readObject",
+        "org.apache.shiro.io.Serializer:deserialize",
+        "org.apache.shiro.web.mgt.CookieRememberMeManager:getRememberedSerializedIdentity",
+        "org.apache.shiro.web.mgt.CookieRememberMeManager:convertBytesToPrincipals"
+      ]
+    },
+    {
+      "sink_name": "SSRF",
+      "sink_desc": "服务端请求伪造漏洞",
+      "severity_level": "Medium",
+      "cwe": "CWE-918",
+      "sinks": [
+        "java.net.URL:openConnection",
+        "java.net.URL:openStream",
+        "java.net.URL:<init>",
+        "java.net.URLConnection:connect",
+        "java.net.HttpURLConnection:connect",
+        "org.apache.http.client.HttpClient:execute",
+        "org.apache.http.impl.client.CloseableHttpClient:execute",
+        "org.apache.http.impl.client.HttpClients:execute",
+        "org.apache.http.client.methods.HttpGet:<init>",
+        "org.apache.http.client.methods.HttpPost:<init>",
+        "org.apache.http.client.methods.HttpPut:<init>",
+        "org.apache.http.client.methods.HttpDelete:<init>",
+        "com.squareup.okhttp.OkHttpClient:newCall",
+        "okhttp3.OkHttpClient:newCall",
+        "okhttp3.Request:newBuilder",
+        "org.springframework.web.client.RestTemplate:exchange",
+        "org.springframework.web.client.RestTemplate:getForObject",
+        "org.springframework.web.client.RestTemplate:getForEntity",
+        "org.springframework.web.client.RestTemplate:postForObject",
+        "org.springframework.web.client.RestTemplate:postForEntity",
+        "org.springframework.web.reactive.function.client.WebClient:get",
+        "org.springframework.web.reactive.function.client.WebClient:post",
+        "retrofit2.Retrofit:create",
+        "org.apache.commons.httpclient.HttpClient:executeMethod",
+        "java.net.Socket:<init>",
+        "javax.imageio.ImageIO:read"
+      ]
+    },
+    {
+      "sink_name": "SQLI",
+      "sink_desc": "SQL注入漏洞",
+      "severity_level": "High",
+      "cwe": "CWE-89",
+      "sinks": [
+        "java.sql.Statement:execute",
+        "java.sql.Statement:executeQuery",
+        "java.sql.Statement:executeUpdate",
+        "java.sql.Statement:executeBatch",
+        "java.sql.Statement:executeLargeUpdate",
+        "java.sql.Connection:prepareStatement",
+        "java.sql.Connection:prepareCall",
+        "java.sql.Connection:nativeSQL",
+        "org.hibernate.Query:createQuery",
+        "org.hibernate.Query:executeUpdate",
+        "org.hibernate.Session:createQuery",
+        "org.hibernate.Session:createSQLQuery",
+        "org.mybatis.spring.SqlSessionTemplate:selectOne",
+        "org.mybatis.spring.SqlSessionTemplate:selectList",
+        "org.mybatis.spring.SqlSessionTemplate:update",
+        "org.mybatis.spring.SqlSessionTemplate:delete",
+        "org.mybatis.spring.SqlSessionTemplate:insert",
+        "javax.persistence.EntityManager:createQuery",
+        "javax.persistence.EntityManager:createNativeQuery",
+        "org.springframework.jdbc.core.JdbcTemplate:query",
+        "org.springframework.jdbc.core.JdbcTemplate:queryForList",
+        "org.springframework.jdbc.core.JdbcTemplate:queryForObject",
+        "org.springframework.jdbc.core.JdbcTemplate:update",
+        "org.springframework.jdbc.core.JdbcTemplate:execute",
+        "com.jfinal.plugin.activerecord.Db:find",
+        "com.jfinal.plugin.activerecord.Db:findFirst",
+        "com.jfinal.plugin.activerecord.Db:update",
+        "org.apache.ibatis.session.SqlSession:selectOne",
+        "org.apache.ibatis.session.SqlSession:selectList",
+        "org.jooq.DSLContext:query",
+        "org.jooq.DSLContext:execute"
+      ]
+    },
+    {
+      "sink_name": "XSS",
+      "sink_desc": "跨站脚本漏洞",
+      "severity_level": "Medium",
+      "cwe": "CWE-79",
+      "sinks": [
+        "javax.servlet.http.HttpServletResponse:getWriter",
+        "javax.servlet.http.HttpServletResponse:getOutputStream",
+        "javax.servlet.ServletResponse:getWriter",
+        "javax.servlet.ServletResponse:getOutputStream",
+        "org.springframework.web.servlet.ModelAndView:addObject",
+        "org.springframework.web.servlet.ModelAndView:addAllObjects",
+        "org.springframework.ui.Model:addAttribute",
+        "org.springframework.ui.ModelMap:addAttribute",
+        "org.apache.struts2.ServletActionContext:getResponse",
+        "javax.servlet.jsp.JspWriter:print",
+        "javax.servlet.jsp.JspWriter:println",
+        "javax.servlet.jsp.JspWriter:write",
+        "org.thymeleaf.context.Context:setVariable",
+        "org.springframework.web.servlet.ModelMap:addAttribute",
+        "org.springframework.web.servlet.view.freemarker.FreeMarkerView:setAttributes",
+        "freemarker.template.Template:process"
+      ]
+    },
+    {
+      "sink_name": "PATH_TRAVERSAL",
+      "sink_desc": "路径遍历漏洞",
+      "severity_level": "Medium",
+      "cwe": "CWE-22",
+      "sinks": [
+        "java.io.File:<init>",
+        "java.io.FileInputStream:<init>",
+        "java.io.FileOutputStream:<init>",
+        "java.io.FileReader:<init>",
+        "java.io.FileWriter:<init>",
+        "java.io.RandomAccessFile:<init>",
+        "java.nio.file.Paths:get",
+        "java.nio.file.Files:newInputStream",
+        "java.nio.file.Files:newOutputStream",
+        "java.nio.file.Files:newBufferedReader",
+        "java.nio.file.Files:newBufferedWriter",
+        "java.nio.file.Files:write",
+        "java.nio.file.Files:writeString",
+        "java.nio.file.Files:readAllBytes",
+        "java.nio.file.Files:readAllLines",
+        "java.nio.file.Files:readString",
+        "java.nio.file.Files:delete",
+        "java.nio.file.Files:copy",
+        "java.nio.file.Files:move",
+        "org.apache.commons.io.FileUtils:openInputStream",
+        "org.apache.commons.io.FileUtils:openOutputStream",
+        "org.apache.commons.io.FileUtils:readFileToString",
+        "org.apache.commons.io.FileUtils:writeStringToFile",
+        "org.apache.commons.io.FileUtils:copyFile",
+        "org.apache.commons.io.FileUtils:deleteDirectory",
+        "org.springframework.util.FileCopyUtils:copy",
+        "org.springframework.core.io.FileSystemResource:<init>",
+        "org.springframework.web.multipart.MultipartFile:transferTo"
+      ]
+    },
+    {
+      "sink_name": "LDAP_INJECTION",
+      "sink_desc": "LDAP注入",
+      "severity_level": "High",
+      "cwe": "CWE-90",
+      "sinks": [
+        "javax.naming.directory.DirContext:search",
+        "javax.naming.directory.DirContext:lookup",
+        "javax.naming.directory.InitialDirContext:search",
+        "javax.naming.directory.InitialDirContext:lookup",
+        "org.springframework.ldap.core.LdapTemplate:search",
+        "org.springframework.ldap.core.LdapTemplate:lookup",
+        "org.springframework.ldap.core.LdapTemplate:authenticate"
+      ]
+    },
+    {
+      "sink_name": "XXE",
+      "sink_desc": "XML外部实体注入",
+      "severity_level": "High",
+      "cwe": "CWE-611",
+      "sinks": [
+        "javax.xml.parsers.DocumentBuilder:parse",
+        "javax.xml.parsers.SAXParser:parse",
+        "javax.xml.parsers.DocumentBuilderFactory:newDocumentBuilder",
+        "javax.xml.parsers.SAXParserFactory:newSAXParser",
+        "javax.xml.transform.Transformer:transform",
+        "javax.xml.transform.TransformerFactory:newTransformer",
+        "javax.xml.stream.XMLInputFactory:createXMLStreamReader",
+        "javax.xml.validation.Validator:validate",
+        "org.dom4j.io.SAXReader:read",
+        "org.jdom2.input.SAXBuilder:build",
+        "org.xml.sax.XMLReader:parse",
+        "org.apache.commons.digester3.Digester:parse"
+      ]
+    },
+    {
+      "sink_name": "REDIRECT",
+      "sink_desc": "URL重定向",
+      "severity_level": "Medium",
+      "cwe": "CWE-601",
+      "sinks": [
+        "javax.servlet.http.HttpServletResponse:sendRedirect",
+        "javax.servlet.http.HttpServletResponse:setHeader",
+        "org.springframework.web.servlet.view.RedirectView:<init>",
+        "org.springframework.web.servlet.view.RedirectView:setUrl",
+        "org.apache.struts2.ServletActionContext:getResponse"
+      ]
+    },
+    {
+      "sink_name": "XPATH_INJECTION",
+      "sink_desc": "XPath注入",
+      "severity_level": "High",
+      "cwe": "CWE-643",
+      "sinks": [
+        "javax.xml.xpath.XPath:compile",
+        "javax.xml.xpath.XPath:evaluate",
+        "org.jaxen.XPath:selectNodes",
+        "org.jaxen.XPath:selectSingleNode"
+      ]
+    },
+    {
+      "sink_name": "CRYPTO_WEAKNESS",
+      "sink_desc": "加密算法弱点",
+      "severity_level": "Medium",
+      "cwe": "CWE-327",
+      "sinks": [
+        "javax.crypto.Cipher:getInstance",
+        "java.security.MessageDigest:getInstance",
+        "java.security.SecureRandom:<init>",
+        "java.security.KeyPairGenerator:getInstance",
+        "javax.crypto.KeyGenerator:getInstance"
+      ]
+    },
+    {
+      "sink_name": "TEMPLATE_INJECTION",
+      "sink_desc": "模板注入",
+      "severity_level": "High",
+      "cwe": "CWE-94",
+      "sinks": [
+        "freemarker.template.Template:process",
+        "org.apache.velocity.VelocityEngine:evaluate",
+        "org.apache.velocity.app.Velocity:evaluate",
+        "org.thymeleaf.TemplateEngine:process",
+        "com.hubspot.jinjava.Jinjava:render"
+      ]
+    },
+    {
+      "sink_name": "LOG_INJECTION",
+      "sink_desc": "日志注入",
+      "severity_level": "Low",
+      "cwe": "CWE-117",
+      "sinks": [
+        "org.slf4j.Logger:info",
+        "org.slf4j.Logger:debug",
+        "org.slf4j.Logger:warn",
+        "org.slf4j.Logger:error",
+        "org.apache.log4j.Logger:info",
+        "org.apache.log4j.Logger:debug",
+        "org.apache.log4j.Logger:warn",
+        "org.apache.log4j.Logger:error",
+        "java.util.logging.Logger:info",
+        "java.util.logging.Logger:warning",
+        "java.util.logging.Logger:severe"
+      ]
+    },
+    {
+      "sink_name": "JNDI_INJECTION",
+      "sink_desc": "JNDI注入",
+      "severity_level": "Critical",
+      "cwe": "CWE-74",
+      "sinks": [
+        "javax.naming.Context:lookup",
+        "javax.naming.InitialContext:lookup",
+        "javax.naming.Context:bind",
+        "javax.naming.Context:rebind",
+        "org.springframework.jndi.JndiTemplate:lookup",
+        "org.springframework.jndi.JndiLocatorDelegate:lookup"
+      ]
+    },
+    {
+      "sink_name": "REFLECTION_INJECTION",
+      "sink_desc": "反射注入",
+      "severity_level": "High",
+      "cwe": "CWE-470",
+      "sinks": [
+        "java.lang.Class:forName",
+        "java.lang.ClassLoader:loadClass",
+        "java.lang.reflect.Method:invoke",
+        "java.lang.reflect.Constructor:newInstance",
+        "java.lang.Class:newInstance",
+        "java.lang.Class:getMethod",
+        "java.lang.Class:getDeclaredMethod"
+      ]
+    },
+    {
+      "sink_name": "EL_INJECTION",
+      "sink_desc": "EL表达式注入",
+      "severity_level": "High",
+      "cwe": "CWE-94",
+      "sinks": [
+        "javax.el.ELProcessor:eval",
+        "javax.el.ELProcessor:getValue",
+        "javax.el.ExpressionFactory:createValueExpression",
+        "javax.el.ValueExpression:getValue",
+        "javax.el.MethodExpression:invoke",
+        "org.apache.el.ExpressionFactoryImpl:createValueExpression",
+        "org.springframework.expression.spel.standard.SpelExpressionParser:parseExpression"
+      ]
+    },
+    {
+      "sink_name": "FILE_WRITE",
+      "sink_desc": "任意文件写入",
+      "severity_level": "High",
+      "cwe": "CWE-73",
+      "sinks": [
+        "java.io.FileOutputStream:write",
+        "java.io.FileWriter:write",
+        "java.io.RandomAccessFile:write",
+        "java.nio.file.Files:write",
+        "java.nio.file.Files:writeString",
+        "org.apache.commons.io.FileUtils:writeStringToFile",
+        "org.apache.commons.io.FileUtils:writeByteArrayToFile",
+        "org.springframework.util.FileCopyUtils:copy"
+      ]
+    },
+    {
+      "sink_name": "FILE_DELETE",
+      "sink_desc": "任意文件删除",
+      "severity_level": "High",
+      "cwe": "CWE-73",
+      "sinks": [
+        "java.io.File:delete",
+        "java.io.File:deleteOnExit",
+        "java.nio.file.Files:delete",
+        "java.nio.file.Files:deleteIfExists",
+        "org.apache.commons.io.FileUtils:deleteDirectory",
+        "org.apache.commons.io.FileUtils:forceDelete"
+      ]
+    }
+  ],
+  "source_rules": [
+    {
+      "source_name": "HTTP_PARAMETER",
+      "sources": [
+        "javax.servlet.http.HttpServletRequest:getParameter",
+        "javax.servlet.http.HttpServletRequest:getParameterValues",
+        "javax.servlet.http.HttpServletRequest:getParameterMap",
+        "javax.servlet.http.HttpServletRequest:getHeader",
+        "javax.servlet.http.HttpServletRequest:getHeaders",
+        "javax.servlet.http.HttpServletRequest:getCookies",
+        "javax.servlet.http.HttpServletRequest:getQueryString",
+        "javax.servlet.http.HttpServletRequest:getInputStream",
+        "javax.servlet.http.HttpServletRequest:getReader"
+      ]
+    },
+    {
+      "source_name": "SPRING_REQUEST",
+      "sources": [
+        "org.springframework.web.bind.annotation.RequestParam",
+        "org.springframework.web.bind.annotation.PathVariable",
+        "org.springframework.web.bind.annotation.RequestBody",
+        "org.springframework.web.bind.annotation.RequestHeader",
+        "org.springframework.web.bind.annotation.CookieValue"
+      ]
+    }
+  ],
+  "sanitizer_rules": [
+    {
+      "sanitizer_name": "ENCODING",
+      "sanitizers": [
+        "org.apache.commons.text.StringEscapeUtils:escapeHtml4",
+        "org.apache.commons.text.StringEscapeUtils:escapeEcmaScript",
+        "org.apache.commons.text.StringEscapeUtils:escapeJava",
+        "org.springframework.web.util.HtmlUtils:htmlEscape",
+        "org.owasp.encoder.Encode:forHtml",
+        "org.owasp.encoder.Encode:forJavaScript"
+      ]
+    },
+    {
+      "sanitizer_name": "VALIDATION",
+      "sanitizers": [
+        "org.apache.commons.validator.GenericValidator:matchRegexp",
+        "java.util.regex.Pattern:matches",
+        "javax.validation.Validator:validate"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "javasinktracer": {
+      "command": "python",
+      "args": [
+        "/Users/mac/Desktop/JavaSinkTracer/mcp_server.py"
+      ],
+      "description": "Java源代码漏洞审计工具 - 基于函数级污点分析",
+      "env": {}
+    }
+  }
+}

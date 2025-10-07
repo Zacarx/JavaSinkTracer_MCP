@@ -1,0 +1,5 @@
+javalang
+colorama
+mcp>=1.0.0
+markdown
+bs4
