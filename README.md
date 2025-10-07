@@ -235,3 +235,6 @@ async def call_tool(name: str, arguments: Any):
 ## 致谢
 
 JavaSinkTracer开发者 [Tr0e](https://github.com/Tr0e) 
+
+## 声明
+本项目仅供学习与研究使用，请勿用于商业或非法用途。因使用本项目产生的任何后果由使用者自行承担。
