@@ -37,6 +37,9 @@ pip install -r requirements.txt
 
 配置完成后重启 Claude Desktop，MCP 工具将自动加载。
 
+## 视频演示
+https://www.bilibili.com/video/BV1XrxDz1EvF
+
 ## 核心功能
 
 ### 漏洞扫描
